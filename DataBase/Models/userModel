@@ -1,0 +1,24 @@
+const mongoose = require('mongoose')
+
+const uniqueValidator = require('mongoose-unique-validator')
+
+
+const userSchema =mongoose.Schema ({
+
+
+firstName :{type : String ,required : [true ,"Svp entrer votre nom"]},
+lastName  :{type : String ,required :[true ,"Svp entrer votre prenom"]},
+cin       :{ type : Number ,required :[true ,"svp entrer votre CIN"] },
+phone     :{ type : Number ,required :[true ,"Svp entrer votre num telephone"]},
+email     :{type : String ,required :[true ,"Svp entrer votre email"], unique :true},
+password  :{type : String ,required :[true ,"Svp entrer votre mot de passe"]},
+role      :{type : Number , default :0}, //0=user ,1= admin
+
+
+date      :{type : Date  ,default :Date.now},
+
+})
+
+userSchema.plugin(uniqueValidator);
+
+module.exports = mongoose.model("Users", userSchema)
